@@ -16,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class
         ]);
+        $middleware->validateCsrfTokens(
+            except: ['/bkash/payment','/bkash/create-payment','/bkash/callback','/fail','/ipn']
+        );
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
