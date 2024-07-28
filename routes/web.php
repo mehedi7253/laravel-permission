@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BkashTokenizePaymentController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,14 @@ Route::group(['middleware' => ['auth']], function() {
     //refund payment routes
     Route::get('/bkash/refund', [BkashTokenizePaymentController::class,'refund'])->name('bkash-refund');
     Route::get('/bkash/refund/status', [BkashTokenizePaymentController::class,'refundStatus'])->name('bkash-refund-status');
+
+    Route::get('/divisions', [LocationController::class, 'getDivisions']);
+    Route::get('/divisions/{divisionId}/districts', [LocationController::class, 'getDistricts']);
+    Route::get('/districts/{districtId}/upazilas', [LocationController::class, 'getUpazilas']);
+
+
+    //
+    Route::get('/location', [LocationController::class, 'index']);
 
 });
 
